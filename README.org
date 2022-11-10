@@ -7,7 +7,7 @@ This is a repo for preparing csv file from [[https://www.avoindata.fi/data/fi/da
 Then changed carriage return to unix with dos2unix.
 iconv -fwindows-1252 -tutf-8 -okokeilu.csv <path to source file>
 There's and extra semicolon which I removed with
-sed -iBACKUP 's/;$//' <filename>
+sed -iBACKUP 's/;$//g' <filename>
 
 
 
