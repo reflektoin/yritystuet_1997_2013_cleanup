@@ -1,0 +1,21 @@
+This is a repo for preparing csv file from [[https://www.avoindata.fi/data/fi/dataset/mot-yritystukiaineisto-1997-2013][mot-yritystukiaineisto-1997-2013]] to be loaded into PostgreSQL DB.
+
+* Notes
+
+
+[[https://www.avoindata.fi/data/dataset/8ae2bfd9-5e2c-42c5-a5d7-313cf2bdeabc/resource/d3b857bb-ffef-4424-94c0-e2b5a5be46d0/download/yritystuet19972013ylemotaineisto.csv][CSV file]] is encoded with windows-1252. I converted it to utf-8 with command
+Then changed carriage return to unix with dos2unix.
+iconv -fwindows-1252 -tutf-8 -okokeilu.csv <path to source file>
+There's and extra semicolon which I removed with
+sed -iBACKUP 's/;$//' <filename>
+
+
+
+
+How to insert timestamps in orgmode and evil-mode? Change to evil-emacs-mode. then buttons work as in emacs normally.
+I managed to load yritystuet19972013ylemotaineisto into psql database.
+Command used was postgres=# \COPY yritystuet  (yritys, Y_tunnus, vuosi,  maksettu_summa  , tukimuoto, myontaja, maakunta,  lainat  , tol1, tol2, tol_versio, Kommentti ) FROM './cleaned_yritystuet.csv' DELIMITER ';' CSV HEADER;
+
+I had previosly converted the file with python3 cleanup.py /home/ravepi/Downloads/kokeilu.csv > cleaned_yritystuet.csv
+kokeilu.csv file was first made with command
+iconv -fwindows-1252 -tutf-8 -okokeilu.csv ~/Downloads/yritystuet19972013ylemotaineisto.csv
