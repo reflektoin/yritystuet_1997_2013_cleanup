@@ -13,7 +13,7 @@ import re
 
 def cleanup(path_to_file):
     """Process a file."""
-    with open(path_to_file, newline='') as csvfile:
+    with open(path_to_file, newline='', encoding='windows-1252') as csvfile:
         for line in csvfile:
             result = clean_line(line)
             print(result)
